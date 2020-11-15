@@ -1,26 +1,30 @@
 <template>
-  <li class="todo-item" :class="{done: isDone, tap: hasBeenTapped}" v-touch:tap="clickHandler">
-      <slot></slot>
-  </li>
+    <li class="todo-item" :class="{done: isDone, tap: hasBeenTapped}" v-touch:tap.self="tapHandler" v-touch:touchhold.self="holdHandler">
+        {{text}}
+    </li>
 </template>
 
 <script>
 export default {
 name: 'TodoItem',
 props: {
-    isDone: Boolean
+    isDone: Boolean,
+    text: String
 },
 data: () => ({
     hasBeenTapped: false
 }),
 methods: {
-    clickHandler() {
+    tapHandler() {
         this.$emit('tap')
         this.hasBeenTapped = true
         setTimeout(() => {
             this.hasBeenTapped = false
         }, 200)
 
+    },
+    holdHandler() {
+        this.$emit('hold')
     }
 }
 }
@@ -29,6 +33,7 @@ methods: {
 <style lang="scss">
 .todo-item {
     user-select: none;
+    transition: .2s;
 }
 .done {
     text-decoration: line-through;

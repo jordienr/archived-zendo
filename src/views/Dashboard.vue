@@ -9,12 +9,10 @@
         <TodoItem
           v-for="{ id, text, isDone } in pendingTodos"
           :isDone="isDone"
+          :text="text"
           v-bind:key="id"
           @tap="markAsDone(id, isDone)"
-          v-touch:touchhold="() => touchHoldHandler(id, text)"
-          >
-          {{text}}
-        </TodoItem>
+          @hold="() => touchHoldHandler(id, text)"/>
 
           <div class="divider" v-show="pendingTodos.length && doneTodos.length"></div>      
 
@@ -22,12 +20,10 @@
           v-for="{ id, text, isDone } in doneTodos"
           :ref="id"
           :isDone="isDone"
+          :text="text"
           v-bind:key="id"
           @tap="markAsDone(id, isDone)"
-          v-touch:touchhold="() => touchHoldHandler(id, text)"
-          >
-          {{text}}
-        </TodoItem>      
+          @hold="() => touchHoldHandler(id, text)"/> 
       </ul>
     </div>
     <div class="footer">
