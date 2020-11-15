@@ -1,0 +1,25 @@
+body, html {
+    padding: 0;
+    margin: 0;
+    background-color: $gray-100;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Georgia', 'Times New Roman', Times, serif;
+    color: $gray-900;
+}
+
+p, ul, li, a {
+    font-family: 'Inter', 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: $gray-800;
+    font-size: $text-sm;
+}
+
+h1 {
+    font-size: $text-xl;
+}
+h2 {
+    font-size: $text-md;
+}
+
+

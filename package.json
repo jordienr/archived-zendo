@@ -9,9 +9,12 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "date-fns": "^2.16.1",
+    "localbase": "^0.7.4",
     "register-service-worker": "^1.7.1",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
+    "vue2-touch-events": "^2.3.2",
     "vuex": "^3.4.0"
   },
   "devDependencies": {
@@ -26,6 +29,7 @@
     "eslint-plugin-vue": "^6.2.2",
     "node-sass": "^4.12.0",
     "sass-loader": "^8.0.2",
+    "vue-mono-icons": "^1.0.1",
     "vue-template-compiler": "^2.6.11"
   }
 }

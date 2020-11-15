@@ -1,32 +1,84 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div v-if="loading" class="loading">
+      <h1>zendō</h1>
+      <p>Task list</p>
     </div>
-    <router-view/>
+    <div v-else>
+      <div id="nav">
+        <router-link to="/settings">···</router-link>
+      </div>
+      <transition name="fade">
+        <router-view/>
+      </transition>
+    </div>
   </div>
 </template>
 
+<script>
+export default {
+  name: 'App',
+  data: () => ({
+    loading: true
+  }),
+  created() {
+    setTimeout(() => this.loading = false, 800)
+  }
+}
+</script>
+
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+@import '@/scss/main.scss';
+
+div {
+  user-select: none;
 }
 
 #nav {
-  padding: 30px;
-
+  display: flex;
+  justify-content: flex-end;
   a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+    padding: 1rem;
+    margin-top: 1rem;
+    text-decoration: none;
+    font-size: 1.5rem;
+    color: $gray-800;
   }
+}
+
+.loading {
+  display: flex;
+  width: 100%;
+  height: 90vh;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  h1 {
+    margin: 0;
+    font-style: italic;
+  }
+  p {
+    margin: .5rem;
+    font-weight: lighter;
+  }
+}
+.header {
+  margin-top: 72px;
+  text-align: center;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 75px);
+  width: 100vw;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .4s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  filter: blur(2px)
 }
 </style>
