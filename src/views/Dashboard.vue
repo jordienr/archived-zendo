@@ -59,6 +59,8 @@
 import TodoItem from '@/components/TodoItem.vue'
 import { AddIcon, CircleCheckIcon, CircleWarningIcon } from 'vue-mono-icons'
 import { getTodos, addTodo, updateTodo, deleteTodo } from '@/db'
+import { format } from 'date-fns'
+
 export default {
   name: 'Home',
   components: {
@@ -66,7 +68,6 @@ export default {
     AddIcon
   },
   data: () => ({
-    today: '14, November',
     todos: [],
     newTodo: '',
     modal: {
@@ -127,6 +128,9 @@ export default {
     },
     pendingTodos() {
       return this.todos.filter(item => item.isDone === false)
+    },
+    today() {
+      return format(new Date(), ['d, MMMM'])
     }
   },
   async mounted() {
