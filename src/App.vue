@@ -36,13 +36,13 @@ div {
 
 #nav {
   display: flex;
+  padding: 1rem;
   justify-content: flex-end;
   a {
     padding: 1rem;
-    margin-top: 1rem;
     text-decoration: none;
     font-size: 1.5rem;
-    color: $gray-800;
+    color: $gray-600;
   }
 }
 
@@ -70,7 +70,7 @@ div {
 .container {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 75px);
+  height: calc(100vh - 100px);
   width: 100vw;
 }
 

@@ -11,11 +11,13 @@ module.exports = {
     }
   },
   pwa: {
+    appleMobileWebAppCapable: 'yes',
     manifestOptions: {
       display: 'fullscreen'
     },
     themeColor: '#F7FAFC',
     msTileColor: '#F7FAFC',
+    appleMobileWebAppStatusBarStyle: 'black-translucent',
     iconPaths: {
       favicon32: 'img/icons/favicon-32x32.png',
       favicon16: 'img/icons/favicon-16x16.png',

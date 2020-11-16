@@ -136,13 +136,6 @@ export default {
 </script>
 <style lang="scss" scoped>
 
-.container {
-  display: flex;
-  flex-direction: column;
-  height: calc(100vh - 75px);
-  width: 100vw;
-}
-
 .todos {
   list-style-type: none;
   padding: 0;
