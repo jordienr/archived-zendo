@@ -12,7 +12,7 @@
           :text="text"
           v-bind:key="id"
           @tap="() => markAsDone(id, isDone)"
-          v-touch:touchhold.stop="() => touchHoldHandler(id, text)"/>
+          @hold="() => touchHoldHandler(id, text)"/>
 
           <div class="divider" v-show="pendingTodos.length && doneTodos.length"></div>      
 
@@ -22,7 +22,7 @@
           :text="text"
           v-bind:key="id"
           @tap="() => markAsDone(id, isDone)"
-          v-touch:touchhold.stop="() => touchHoldHandler(id, text)"/> 
+          @hold="() => touchHoldHandler(id, text)"/> 
       </ul>
     </div>
     <div class="footer">

@@ -1,5 +1,11 @@
 <template>
-    <li class="todo-item" :class="{done: isDone, tap: hasBeenTapped}" v-touch:tap.stop="tap">
+    <li 
+        class="todo-item" 
+        :class="{done: isDone, tap: selected}" 
+        v-touch-class="'tap'"
+        @click.stop="tap"
+        v-touch:touchhold.stop="hold"
+        >
         {{text}}
     </li>
 </template>
@@ -12,16 +18,25 @@ props: {
     text: String
 },
 data: () => ({
-    hasBeenTapped: false
+    selected: false
 }),
 methods: {
-    tap() {
-        this.hasBeenTapped = true
+    tap(e) {
+        console.log(e)
+        this.selected = true
+        this.$emit('tap')
         setTimeout(() => {
-            this.hasBeenTapped = false
-            this.$emit('tap')
+            this.selected = false
         }, 300)
+    },
+    hold(e) {
+        console.log('hold', e)
+        this.selected = true
+        this.$emit('hold')
     }
+},
+updated() {
+    this.selected = false
 }
 }
 </script>
