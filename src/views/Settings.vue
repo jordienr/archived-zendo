@@ -41,6 +41,10 @@
       <div class="input">
         <p>Mark all as done</p>
       </div>
+      <div class="divider"></div>
+      <div class="input">
+        <p>Version: {{ version }}</p>
+      </div>
     </div>
     <footer class="actions">
       <button @click="$router.push('/')">Cancel</button>
@@ -48,6 +52,16 @@
     </footer>
   </div>
 </template>
+
+<script>
+export default {
+  computed: {
+    version() {
+      return process.env.VUE_APP_VERSION
+    }
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 .input {
