@@ -11,24 +11,23 @@
           :isDone="isDone"
           :text="text"
           v-bind:key="id"
-          @tap="markAsDone(id, isDone)"
-          @hold="() => touchHoldHandler(id, text)"/>
+          @tap="() => markAsDone(id, isDone)"
+          v-touch:touchhold.stop="() => touchHoldHandler(id, text)"/>
 
           <div class="divider" v-show="pendingTodos.length && doneTodos.length"></div>      
 
         <TodoItem
           v-for="{ id, text, isDone } in doneTodos"
-          :ref="id"
           :isDone="isDone"
           :text="text"
           v-bind:key="id"
-          @tap="markAsDone(id, isDone)"
-          @hold="() => touchHoldHandler(id, text)"/> 
+          @tap="() => markAsDone(id, isDone)"
+          v-touch:touchhold.stop="() => touchHoldHandler(id, text)"/> 
       </ul>
     </div>
     <div class="footer">
       <div class="new-todo">
-        <input type="text" name="new" placeholder="New todo" id="new" v-model="newTodo">
+        <input type="text" name="new" placeholder="New todo" id="new" v-model="newTodo" autocomplete="off">
         <button @click.prevent="addTodo">
           <AddIcon size="14" color="$gray-900"/>
         </button>
@@ -56,6 +55,7 @@ import TodoItem from '@/components/TodoItem.vue'
 import { AddIcon, CircleCheckIcon, CircleWarningIcon } from 'vue-mono-icons'
 import { getTodos, addTodo, updateTodo, deleteTodo } from '@/db'
 import { format } from 'date-fns'
+import { nanoid } from 'nanoid'
 
 export default {
   name: 'Home',
@@ -76,16 +76,18 @@ export default {
     success: false
   }),
   methods: {
-    async markAsDone(id, isDone) {
-      await updateTodo(id, {
-        isDone: !isDone
+    markAsDone(id, isDone) {
+      const newState = !isDone
+      updateTodo(id, {
+        isDone: newState
+      }).then(() => {
+        this.getTodos()
       })
-      await this.getTodos()
     },
     addTodo() {
       if (this.newTodo.length) {
         addTodo({
-          id: this.todos.length,
+          id: nanoid(10),
           text: this.newTodo,
           isDone: false
         }).then(() => this.getTodos())
@@ -106,6 +108,7 @@ export default {
         actions: true,
         icon: CircleWarningIcon
       }
+      UIC.log('HOLD')
     },
     async deleteTodo() {
       await deleteTodo(this.selectedTodo.id)
@@ -151,6 +154,13 @@ export default {
   margin-top: auto;
   margin-bottom: 4rem;
   .new-todo {
+    transition: .2s;
+    display: inline-block;
+    border-radius: 4px;
+    &:focus-within {
+      box-shadow: 0px 0px 0px 4px $gray-300;
+      transition: .3s;
+    }
     input, button {
       padding: 1rem;
       min-width: 44px;
@@ -166,6 +176,7 @@ export default {
       border-radius: 0 4px 4px 0;
     }
   }
+  
 }
 
 .modal {

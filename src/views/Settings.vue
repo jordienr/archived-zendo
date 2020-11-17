@@ -30,6 +30,17 @@
       <div class="input">
         <p>Dark theme</p>
       </div>
+      <div class="divider"></div>
+      <div class="section-title">
+        <h2>Shortcuts</h2>
+      </div>
+      <div class="divider"></div>
+      <div class="input">
+        <p>Delete all todos</p>
+      </div>
+      <div class="input">
+        <p>Mark all as done</p>
+      </div>
     </div>
     <footer class="actions">
       <button @click="$router.push('/')">Cancel</button>
@@ -53,12 +64,20 @@
   h2 {
     font-family: $sans-serif;
     font-size: $text-sm;
-    font-weight: normal;
+    font-weight: bold;
     padding: 0 1rem;
     margin: 0;
-  }
+    }
+}
+.header {
+  border-bottom: 1px solid $gray-300;
+}
+.body {
+  padding-bottom: 4rem;
+  padding-top: 1rem;
 }
 .actions {
+  border-top: 1px solid $gray-300;
   display: flex;
   justify-content: flex-end;
   padding: 1rem;

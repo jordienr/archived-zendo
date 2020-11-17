@@ -1,5 +1,5 @@
 <template>
-    <li class="todo-item" :class="{done: isDone, tap: hasBeenTapped}" v-touch:tap.self="tapHandler" v-touch:touchhold.self="holdHandler">
+    <li class="todo-item" :class="{done: isDone, tap: hasBeenTapped}" v-touch:tap.stop="tap">
         {{text}}
     </li>
 </template>
@@ -15,16 +15,12 @@ data: () => ({
     hasBeenTapped: false
 }),
 methods: {
-    tapHandler() {
-        this.$emit('tap')
+    tap() {
         this.hasBeenTapped = true
         setTimeout(() => {
             this.hasBeenTapped = false
-        }, 200)
-
-    },
-    holdHandler() {
-        this.$emit('hold')
+            this.$emit('tap')
+        }, 300)
     }
 }
 }

@@ -81,4 +81,8 @@ div {
   opacity: 0;
   filter: blur(2px)
 }
+
+textarea:focus, input:focus, button:focus {
+    outline: none;
+}
 </style>
